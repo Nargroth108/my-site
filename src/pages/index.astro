@@ -1,11 +1,23 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+import Hero from '../components/Hero.astro';
+import WhyWebsite from '../components/WhyWebsite.astro';
+import Advantages from '../components/Advantages.astro';
+import Services from '../components/Services.astro';
+import BottomCTA from '../components/BottomCTA.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const title = "WebDev - Modern weboldalak kisvállalkozásoknak";
+const description = "Professzionális webfejlesztési szolgáltatások magyarországi vállalkozások számára. Modern, reszponzív weboldalak készítése kedvező áron.";
 ---
 
-<Layout>
-	<Welcome />
+<Layout title={title} description={description}>
+    <Navigation />
+    <main>
+        <Hero />
+        <WhyWebsite />
+        <Advantages />
+        <Services />
+        <BottomCTA />
+    </main>
 </Layout>

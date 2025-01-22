@@ -1,0 +1,86 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+
+const title = "Weboldal Készítés Folyamata | WebDev";
+const description = "Ismerje meg a weboldal készítés folyamatát lépésről lépésre. Átlátható és professzionális megoldások az Ön vállalkozása számára.";
+
+const steps = [
+    {
+        title: "1. Konzultáció és Tervezés",
+        description: "Az első lépés egy részletes konzultáció, ahol megismerem az Ön vállalkozását, céljait és elvárásait. Közösen alakítjuk ki a weboldal koncepcióját és funkcionalitását.",
+        icon: "🎯"
+    },
+    {
+        title: "2. Design Tervezés",
+        description: "Modern, az Ön brandjéhez illeszkedő design kialakítása. A terveket közösen véglegesítjük, hogy tökéletesen megfeleljen az elképzeléseinek.",
+        icon: "🎨"
+    },
+    {
+        title: "3. Fejlesztés",
+        description: "A weboldal technikai megvalósítása modern technológiákkal, mobilbarát és SEO-optimalizált megoldásokkal.",
+        icon: "💻"
+    },
+    {
+        title: "4. Tartalom Feltöltés",
+        description: "A weboldal feltöltése az Ön által biztosított vagy közösen létrehozott tartalommal, képekkel és egyéb médiával.",
+        icon: "📝"
+    },
+    {
+        title: "5. Tesztelés és Finomhangolás",
+        description: "Alapos tesztelés különböző eszközökön és böngészőkben, valamint az esetleges módosítások elvégzése.",
+        icon: "🔍"
+    },
+    {
+        title: "6. Élesítés és Támogatás",
+        description: "A weboldal publikálása és elérhetővé tétele. Igény szerint további támogatás és karbantartás biztosítása.",
+        icon: "🚀"
+    }
+];
+---
+
+<Layout title={title} description={description}>
+    <Navigation />
+    <main class="pt-32 pb-16 min-h-screen bg-gray-50 dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white text-center mb-8">
+                    Hogyan készül az Ön weboldala?
+                </h1>
+                <p class="text-xl text-gray-600 dark:text-gray-300 text-center mb-16">
+                    Ismerje meg a weboldal készítés folyamatát lépésről lépésre
+                </p>
+                
+                <div class="space-y-12">
+                    {steps.map((step) => (
+                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 transform hover:scale-[1.02] transition-transform duration-300">
+                            <div class="flex items-start gap-6">
+                                <span class="text-4xl">{step.icon}</span>
+                                <div>
+                                    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
+                                        {step.title}
+                                    </h3>
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        {step.description}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                <div class="mt-16 text-center">
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">
+                        Készen áll a kezdésre?
+                    </h2>
+                    <a
+                        href="/#contact"
+                        class="inline-block px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 transition-colors duration-300"
+                    >
+                        Kezdjük el a projektet
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+</Layout>
