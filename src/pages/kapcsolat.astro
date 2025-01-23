@@ -1,9 +1,149 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Popup from '../components/Popup.astro';
 ---
 
-<Layout title="Kapcsolat | Modern Weboldalak">
-	<main>
-		<!-- Content will be added here -->
-	</main>
-</Layout>
+<BaseLayout 
+    title="Kapcsolat" 
+    description="Vegye fel velem a kapcsolatot webes projektjével kapcsolatban. Személyre szabott megoldások, gyors válaszidő."
+>
+    <Popup show={false} type="success" message="Köszönöm az üzenetet! Hamarosan felveszem Önnel a kapcsolatot." client:load />
+    
+    <main class="pb-8 min-h-screen bg-gray-50 dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="max-w-2xl mx-auto">
+                <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-8 text-center">
+                    Kapcsolat
+                </h1>
+
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 mb-8">
+                    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4 text-center">
+                        Kérdése van?
+                    </h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-6 text-center">
+                        Az alábbi űrlap segítségével, vagy az [] e-mail címen keresztül könnyen kapcsolatba tud lépni velem!
+                        <br>
+                        Megkeresését követően 1-3 munkanapon belül felveszem Önnel a kapcsolatot.
+                    </p>
+
+                    <form id="contactForm" class="space-y-6 mt-12">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                                Név
+                            </label>
+                            <input
+                                type="text"
+                                name="name"
+                                id="name"
+                                required
+                                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
+                            />
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                                Email
+                            </label>
+                            <input
+                                type="email"
+                                name="email"
+                                id="email"
+                                required
+                                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
+                            />
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                                Üzenet
+                            </label>
+                            <textarea
+                                name="message"
+                                id="message"
+                                required
+                                rows="4"
+                                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white"
+                            ></textarea>
+                        </div>
+                        <div>
+                            <button
+                                type="submit"
+                                class="w-full px-8 py-3 text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
+                            >
+                                Üzenet küldése
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+             
+
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 text-center">
+                    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
+                        Konkrét projekt ötlete van?
+                    </h2>
+                    <p class="text-gray-600 dark:text-gray-300 mb-6">
+                        Kérjen részletes árajánlatot, és hamarosan felveszem Önnel a kapcsolatot!
+                    </p>
+                    <div class="relative w-fit mx-auto">
+                        <div class="absolute inset-0 bg-blue-600 dark:bg-blue-500 rounded-md animate-subtle-pulse"></div>
+                        <a
+                            href="/arajanlat"
+                            class="relative mx-auto w-fit inline-flex justify-center items-center px-8 py-3 text-base font-medium rounded-md text-white hover-gradient hover:scale-105 transition-all duration-200"
+                        >
+                            Ingyenes árajánlat kérése
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</BaseLayout>
+
+<script>
+    const form = document.querySelector('#contactForm') as HTMLFormElement;
+    form?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+        
+        try {
+            const response = await fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    access_key: 'ac235d36-01ad-429e-99f6-8a6a20806b59',
+                    ...data,
+                    subject: `Új kapcsolatfelvétel - ${data.name}`,
+                })
+            });
+            
+            if (response.ok) {
+                // Show success popup
+                const event = new CustomEvent('showPopup', { 
+                    detail: { 
+                        type: 'success' as const, 
+                        message: 'Köszönöm az üzenetet! Hamarosan felveszem Önnel a kapcsolatot.' 
+                    }
+                });
+                document.dispatchEvent(event);
+                
+                // Reset form
+                form.reset();
+            } else {
+                throw new Error('Hiba történt a küldés során');
+            }
+        } catch (error) {
+            // Show error popup
+            const event = new CustomEvent('showPopup', { 
+                detail: { 
+                    type: 'error' as const, 
+                    message: 'Hiba történt a küldés során. Kérjük, próbálja újra később.' 
+                }
+            });
+            document.dispatchEvent(event);
+        }
+    });
+</script>
