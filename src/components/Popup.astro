@@ -1,0 +1,64 @@
+---
+interface Props {
+    show: boolean;
+    type: 'success' | 'error';
+    message: string;
+}
+
+const { show, type, message } = Astro.props;
+---
+
+<div 
+    class:list={[
+        "fixed top-24 left-1/2 transform -translate-x-1/2 z-50 px-6 py-4 rounded-lg shadow-lg transition-all duration-300",
+        show ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none",
+        type === 'success' ? "bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-100" : "bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-100"
+    ]}
+    role="alert"
+>
+    <div class="flex items-center gap-3">
+        {type === 'success' ? (
+            <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+            </svg>
+        ) : (
+            <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+            </svg>
+        )}
+        <p class="text-sm font-medium">{message}</p>
+    </div>
+</div>
+
+<script>
+    // Define custom event type
+    interface PopupEvent extends CustomEvent {
+        detail: {
+            type: 'success' | 'error';
+            message: string;
+        }
+    }
+
+    // Hide popup after 5 seconds
+    let timeoutId: ReturnType<typeof setTimeout>;
+    
+    document.addEventListener('showPopup', ((e: PopupEvent) => {
+        const popup = document.querySelector('[role="alert"]');
+        if (!popup) return;
+        
+        // Clear any existing timeout
+        if (timeoutId) {
+            clearTimeout(timeoutId);
+        }
+        
+        // Show popup
+        popup.classList.remove('opacity-0', '-translate-y-4', 'pointer-events-none');
+        popup.classList.add('opacity-100', 'translate-y-0');
+        
+        // Hide after 5 seconds
+        timeoutId = setTimeout(() => {
+            popup.classList.remove('opacity-100', 'translate-y-0');
+            popup.classList.add('opacity-0', '-translate-y-4', 'pointer-events-none');
+        }, 5000);
+    }) as EventListener);
+</script>

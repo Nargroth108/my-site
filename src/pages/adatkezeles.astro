@@ -1,0 +1,127 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout 
+    title="Adatkezelési tájékoztató | Nargroth" 
+    description="Adatkezelési tájékoztató és GDPR információk"
+>
+    <main class="min-h-screen pb-8 bg-gray-50 dark:bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto">
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
+                    <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
+                        Adatkezelési tájékoztató
+                    </h1>
+
+                    <div class="prose dark:prose-invert max-w-none">
+                        <h2>1. Adatkezelő személy</h2>
+                        <ul>
+                            <li><strong>Név:</strong> []</li>
+                            <li><strong>Adószám:</strong> []</li>
+                            <li><strong>Nyilvántartási szám:</strong> []</li>
+                            <li><strong>Székhely:</strong> []</li>
+                            <li><strong>Email:</strong> []</li>
+                            <li><strong>Weboldal:</strong> []</li>
+                        </ul>
+
+                        <h2>2. A kezelt személyes adatok köre</h2>
+                        <p>Az árajánlatkérés során az alábbi személyes adatokat kezelem:</p>
+                        <ul>
+                            <li>Név (kötelező)</li>
+                            <li>Email cím (kötelező)</li>
+                            <li>Telefonszám (opcionális)</li>
+                            <li>Cég neve (opcionális)</li>
+                        </ul>
+
+                        <h2>3. Az adatkezelés célja</h2>
+                        <p>A személyes adatok kezelésének célja:</p>
+                        <ul>
+                            <li>Árajánlat készítése és küldése</li>
+                            <li>Kapcsolattartás az árajánlattal kapcsolatban</li>
+                            <li>Szerződéskötés előkészítése</li>
+                        </ul>
+
+                        <h2>4. Az adatkezelés időtartama</h2>
+                        <p>
+                            A személyes adatokat az árajánlat elfogadása esetén a szerződéses jogviszony fennállásáig, 
+                            elutasítása esetén az árajánlat elutasításától számított 30 napig őrzöm meg. 
+                            Ezt követően a személyes adatokat törlöm.
+                        </p>
+
+                        <h2>5. Az adatkezelés jogalapja</h2>
+                        <p>
+                            Az adatkezelés jogalapja az Ön hozzájárulása (GDPR 6. cikk (1) bekezdés a) pont), 
+                            amelyet az árajánlatkérő űrlap kitöltésével és elküldésével ad meg.
+                        </p>
+
+                        <h2>6. Adattovábbítás</h2>
+                        <p>
+                            A személyes adatokat harmadik félnek nem továbbítom, kivéve, ha erre jogszabály kötelez.
+                        </p>
+
+                        <h2>7. Az Ön jogai</h2>
+                        <p>Önt az alábbi jogok illetik meg:</p>
+                        <ul>
+                            <li>Hozzáférési jog</li>
+                            <li>Helyesbítéshez való jog</li>
+                            <li>Törléshez való jog</li>
+                            <li>Az adatkezelés korlátozásához való jog</li>
+                            <li>Adathordozhatósághoz való jog</li>
+                            <li>Tiltakozáshoz való jog</li>
+                        </ul>
+
+                        <h2>8. Adatbiztonság</h2>
+                        <p>
+                            Az Ön személyes adatainak biztonsága érdekében megfelelő technikai és szervezési 
+                            intézkedéseket alkalmazok az adatok védelme érdekében.
+                        </p>
+
+                        <h2>9. Kapcsolatfelvétel</h2>
+                        <p>
+                            Adatvédelemmel kapcsolatos kérdéseivel kérem, forduljon hozzám bizalommal 
+                            az alábbi email címen: []
+                        </p>
+
+                        <h2>10. Jogorvoslat</h2>
+                        <p>
+                            Ha úgy érzi, hogy személyes adatainak kezelése kapcsán sérelem érte, kérem, 
+                            élőször keressen meg engem az esetleges jogsértesítés tisztázása és mielőbbi orvoslása érdekében. 
+                            Amennyiben ez nem vezet eredményre, panaszt nyújthat be a Nemzeti Adatvédelmi és 
+                            Információszabadság Hatósághoz (NAIH).
+                        </p>
+                        <p>
+                           <strong>A NAIH elérhetőségei:</strong><br>
+                           <ul>
+                            <li>Cím: 1055 Budapest, Falk Miksa utca 9-11.</li>
+                            <li>Postacím: 1363 Budapest, Pf. 9.</li>
+                            <li>Telefon: +36 1 391 1400</li>
+                            <li>Email: ugyfelszolgalat@naih.hu</li>
+                            <li>Weboldal: www.naih.hu</li>
+                           </ul>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</BaseLayout>
+
+<style>
+    /* Add Tailwind Typography styles for better content formatting */
+    .prose {
+        @apply text-gray-600 dark:text-gray-300;
+    }
+    .prose h2 {
+        @apply text-xl font-semibold text-gray-900 dark:text-white mt-8 mb-4;
+    }
+    .prose p {
+        @apply mb-4;
+    }
+    .prose ul {
+        @apply list-disc list-inside mb-4 ml-4;
+    }
+    .prose li {
+        @apply mb-2;
+    }
+</style>
