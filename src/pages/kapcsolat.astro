@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Popup from '../components/Popup.astro';
+import CTASection from '../components/CTASection.astro';
 ---
 
 <BaseLayout 
@@ -9,15 +10,15 @@ import Popup from '../components/Popup.astro';
 >
     <Popup show={false} type="success" message="Köszönöm az üzenetet! Hamarosan felveszem Önnel a kapcsolatot." client:load />
     
-    <main class="pb-8 min-h-screen bg-gray-50 dark:bg-gray-900">
+    <main class="min-h-screen bg-gray-50 dark:bg-gray-900">
         <div class="container mx-auto px-4">
             <div class="max-w-2xl mx-auto">
-                <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-8 text-center">
+                <h1 class="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 mb-8 py-2 text-center">
                     Kapcsolat
                 </h1>
 
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 mb-8">
-                    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4 text-center">
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
+                    <h2 class="text-2xl font-semibold text-gray-700 dark:text-gray-300 mb-4 py-2 text-center">
                         Kérdése van?
                     </h2>
                     <p class="text-gray-600 dark:text-gray-300 mb-6 text-center">
@@ -73,29 +74,15 @@ import Popup from '../components/Popup.astro';
                         </div>
                     </form>
                 </div>
-
-             
-
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 text-center">
-                    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
-                        Konkrét projekt ötlete van?
-                    </h2>
-                    <p class="text-gray-600 dark:text-gray-300 mb-6">
-                        Kérjen részletes árajánlatot, és hamarosan felveszem Önnel a kapcsolatot!
-                    </p>
-                    <div class="relative w-fit mx-auto">
-                        <div class="absolute inset-0 bg-blue-600 dark:bg-blue-500 rounded-md animate-subtle-pulse"></div>
-                        <a
-                            href="/arajanlat"
-                            class="relative mx-auto w-fit inline-flex justify-center items-center px-8 py-3 text-base font-medium rounded-md text-white hover-gradient hover:scale-105 transition-all duration-200"
-                        >
-                            Ingyenes árajánlat kérése
-                        </a>
-                    </div>
-                </div>
             </div>
+
+            <CTASection
+                title="Konkrét projekt ötlete van?"
+                description="Kérjen részletes árajánlatot, és hamarosan felveszem Önnel a kapcsolatot!"
+            />
         </div>
     </main>
+
 </BaseLayout>
 
 <script>
