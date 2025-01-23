@@ -29,7 +29,120 @@ const { title, description } = Astro.props;
 </html>
 
 <style is:global>
+	:root {
+		--accent: 136, 58, 234;
+		--accent-light: 224, 204, 250;
+		--accent-dark: 49, 10, 101;
+		--accent-gradient: linear-gradient(
+			45deg,
+			rgb(var(--accent)),
+			rgb(var(--accent-light)) 30%,
+			white 60%
+		);
+	}
+
+	/* Webkit (Chrome, Safari, Edge) Scrollbar */
+	::-webkit-scrollbar {
+		width: 14px;
+		height: 14px;
+	}
+
+	::-webkit-scrollbar-track {
+		background: transparent;
+		border-left: 1px solid rgba(148, 163, 184, 0.4); /* gray-400 border */
+		box-shadow: inset 1px 0 0 rgba(148, 163, 184, 0.15); /* subtle inner shadow */
+	}
+
+	::-webkit-scrollbar-thumb {
+		background: rgba(148, 163, 184, 0.5); /* gray-400 with opacity */
+		border: 3px solid transparent;
+		background-clip: padding-box;
+		border-radius: 8px;
+		backdrop-filter: blur(4px);
+	}
+
+	::-webkit-scrollbar-thumb:hover {
+		background: rgba(100, 116, 139, 0.6); /* gray-500 with opacity */
+		border: 3px solid transparent;
+		background-clip: padding-box;
+	}
+
+	/* Dark mode scrollbar */
+	@media (prefers-color-scheme: dark) {
+		::-webkit-scrollbar-track {
+			border-left: 1px solid rgba(71, 85, 105, 0.4); /* gray-600 border */
+			box-shadow: inset 1px 0 0 rgba(71, 85, 105, 0.15); /* subtle inner shadow */
+		}
+
+		::-webkit-scrollbar-thumb {
+			background: rgba(71, 85, 105, 0.5); /* gray-600 with opacity */
+		}
+
+		::-webkit-scrollbar-thumb:hover {
+			background: rgba(100, 116, 139, 0.6); /* gray-500 with opacity */
+		}
+	}
+
+	/* Firefox Scrollbar */
+	* {
+		scrollbar-width: thin;
+		scrollbar-color: rgba(148, 163, 184, 0.5) transparent;
+	}
+
+	@media (prefers-color-scheme: dark) {
+		* {
+			scrollbar-color: rgba(71, 85, 105, 0.5) transparent;
+		}
+	}
+
+	@keyframes subtle-pulse {
+		0% {
+			transform: scale(1);
+			opacity: 0.8;
+		}
+		50% {
+			transform: scale(1.02);
+			opacity: 0.9;
+		}
+		100% {
+			transform: scale(1);
+			opacity: 0.8;
+		}
+	}
+
+	.animate-subtle-pulse {
+		animation: subtle-pulse 2s ease-in-out infinite;
+	}
+
+	.hover-gradient {
+		position: relative;
+		overflow: hidden;
+	}
+
+	.hover-gradient::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: linear-gradient(135deg, #3b82f6 0%, #2563eb 50%, #1d4ed8 100%);
+		opacity: 0;
+		transition: all 0.2s ease-in-out;
+		border-radius: inherit;
+		z-index: -1;
+		box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0);
+	}
+
+	.hover-gradient:hover::before {
+		opacity: 1;
+		box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.2);
+	}
+
 	html {
+		font-family: system-ui, sans-serif;
+		background: #f6f6f6;
+		background-size: 224px;
 		scroll-behavior: smooth;
 	}
 </style>
