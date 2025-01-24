@@ -1,9 +1,135 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CTASection from '../components/CTASection.astro';
+
+interface Step {
+    title: string;
+    description: string;
+    icon: string;
+}
+
+const steps: Step[] = [
+    {
+        title: "1. Konzultáció",
+        description: "Az első lépés egy, jellemzően online megbeszélés, ahol részletesen átbeszéljük az Ön igényeit és céljait. Ezután a kitűzött célokat és határidőket szerződésbe foglaljuk.",
+        icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />`
+    },
+    {
+        title: "2. Tervezés",
+        description: "A megbeszéltek alapján elkészítem a weboldal vagy alkalmazás részletes tervét. Ez tartalmazza a dizájnt, funkciókat és a megvalósításhoz szükséges technológiai megoldásokat.",
+        icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />`
+    },
+    {
+        title: "3. Fejlesztés",
+        description: "A jóváhagyott terv alapján megkezdem az oldal fejlesztését. A folyamat során végig kapcsolatban maradunk, így bármikor jelezhet ha változtatni szeretne valamin, és az Ön igényei szerint fogom alakítani a projektet.",
+        icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />`
+    },
+    {
+        title: "4. Tesztelés",
+        description: "A fejlesztés végén alapos tesztelés következik. Ellenőrzöm az összes elkészült funkciót, a weboldal megjelenését különböző eszközökön, és annak teljesítményét is.",
+        icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />`
+    },
+    {
+        title: "5. Átadás és Támogatás",
+        description: "A végleges verzió átadása után sem hagyom magára. igény szerint szívesen segítek a weboldal kezelésében, időszakos karbantartási munkák elvégzésében, vagy akár új funkciók fejlesztésében is.",
+        icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />`
+    }
+];
 ---
 
-<Layout title="Weboldalkészítés Folyamata | Modern Weboldalak">
-	<main>
-		<!-- Content will be added here -->
-	</main>
-</Layout>
+<BaseLayout 
+    title="A weboldalkészítés folyamata" 
+    description="Ismerje meg a webfejlesztési folyamatot. Átlátható, személyre szabott együttműködés az Ön igényei szerint."
+>
+    <main class="min-h-screen bg-gradient-to-b from-gray-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">
+        <div class="container mx-auto px-4 pb-16">
+            <div class="max-w-4xl mx-auto">
+                <!-- Header -->
+                <div class="text-center mb-16">
+                    <h1 class="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 mb-4 py-2">
+                        A weboldal elkészítésének lépései
+                    </h1>
+                    <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+                        Átlátható és hatékony folyamat, amely során végig szoros kapcsolatban maradunk. 
+                        Az Ön igényei és visszajelzései alapján alakítjuk a projektet a legjobb eredmény érdekében.
+                    </p>
+                </div>
+
+                <!-- Steps -->
+                <div class="space-y-12">
+                    {steps.map((step, index) => (
+                        <div class="relative">
+                            {index !== steps.length - 1 && (
+                                <div class="absolute left-8 top-20 w-0.5 h-24 bg-gradient-to-b from-blue-600 to-purple-600"></div>
+                            )}
+                            <div class="flex gap-8 items-start">
+                                <div class="flex-shrink-0 w-16 h-16 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center text-white">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <Fragment set:html={step.icon} />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-2">
+                                        {step.title}
+                                    </h3>
+                                    <p class="text-gray-600 dark:text-gray-300 text-lg">
+                                        {step.description}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                <!-- FAQ Section -->
+                <div class="mt-24 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8">
+                    <h2 class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 mb-8 py-2 text-center">
+                        Gyakori kérdések
+                    </h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                               Mennyibe kerül egy weboldal elkészítése?
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-300">
+                                Természetesen ez minden weboldalnál egyedi, egy egyszerűbb bemutatkozó oldal már kevesebb mint 100.000 forintból is elkészíthető, míg egy komoly webshop milliós tétel lehet. Az első konzultáció során megbeszéljük, hogy a tervezett funkciók alapján az Ön weboldala mennyibe fog kerülni.
+                            </p>
+                        </div><div>
+                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                                Mennyi idő alatt készül el egy weboldal?
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-300">
+                                Ez nagyban függ a projekt méretétől és komplexitásától. Egy egyszerűbb bemutatkozó oldal akár 1 hét alatt is elkészülhet, 
+                                míg egy összetettebb webshop vagy egyedi alkalmazás fejlesztése több hónapot vesz igénybe.
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                                Milyen gyakran egyeztetünk a fejlesztés során?
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-300">
+                                Előre megbeszélt időszakonként tartunk egyeztetéseket, ahol bemutatom az oldal addig elkészült részeit 
+                                és megbeszéljük a következő lépéseket. Emellett a folyamat során bármikor elérhető vagyok e-mailben vagy telefonon is.
+                            </p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                                Mi történik az átadás után?
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-300">
+                                Az átadás után sem marad egyedül. Minden általam készített weboldal működésére 2 év garanciát vállalok, ezen felül igény szerint szívesen segítek a weboldal kezelésében, rendszeres 
+                                karbantartásában, frissítésében. Ha bármilyen kérdése vagy problémája merül fel a jövőben az új weboldalával kapcsolatban, állok rendelkezésére!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CTA Section -->
+                <CTASection
+                    title="Kezdjük el a közös munkát!"
+                    description="Ha tetszik az együttműködési folyamat, keressen fel és beszéljük meg az Ön projektjének részleteit."
+                />
+            </div>
+        </div>
+    </main>
+</BaseLayout>

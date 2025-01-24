@@ -2,14 +2,12 @@
 ---
 
 <button
-    id="theme-toggle"
-    class="p-2 rounded-lg text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 transition-colors duration-300"
+    class="theme-toggle p-2 rounded-lg text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 transition-colors duration-300"
     aria-label="Téma váltása"
 >
     <!-- Sun icon -->
     <svg
-        id="theme-toggle-light-icon"
-        class="w-5 h-5 hidden"
+        class="theme-toggle-light-icon w-5 h-5 hidden"
         fill="currentColor"
         viewBox="0 0 20 20"
         xmlns="http://www.w3.org/2000/svg"
@@ -20,8 +18,7 @@
     </svg>
     <!-- Moon icon -->
     <svg
-        id="theme-toggle-dark-icon"
-        class="w-5 h-5 hidden"
+        class="theme-toggle-dark-icon w-5 h-5 hidden"
         fill="currentColor"
         viewBox="0 0 20 20"
         xmlns="http://www.w3.org/2000/svg"
@@ -31,31 +28,30 @@
 </button>
 
 <script>
-    const themeToggleBtn = document.getElementById('theme-toggle');
-    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
-    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    document.querySelectorAll('.theme-toggle').forEach(button => {
+        const lightIcon = button.querySelector('.theme-toggle-light-icon');
+        const darkIcon = button.querySelector('.theme-toggle-dark-icon');
 
-    // Set initial icon state
-    if (document.documentElement.classList.contains('dark')) {
-        themeToggleLightIcon?.classList.remove('hidden');
-        themeToggleDarkIcon?.classList.add('hidden');
-    } else {
-        themeToggleLightIcon?.classList.add('hidden');
-        themeToggleDarkIcon?.classList.remove('hidden');
-    }
-
-    themeToggleBtn?.addEventListener('click', function() {
-        document.documentElement.classList.toggle('dark');
-        
-        // Update icons
-        themeToggleDarkIcon?.classList.toggle('hidden');
-        themeToggleLightIcon?.classList.toggle('hidden');
-        
-        // Update localStorage
+        // Set initial icon state
         if (document.documentElement.classList.contains('dark')) {
-            localStorage.setItem('theme', 'dark');
+            lightIcon?.classList.remove('hidden');
+            darkIcon?.classList.add('hidden');
         } else {
-            localStorage.setItem('theme', 'light');
+            lightIcon?.classList.add('hidden');
+            darkIcon?.classList.remove('hidden');
         }
+
+        button.addEventListener('click', function() {
+            document.documentElement.classList.toggle('dark');
+            
+            // Update icons
+            lightIcon?.classList.toggle('hidden');
+            darkIcon?.classList.toggle('hidden');
+            
+            // Update localStorage
+            localStorage.setItem('theme', 
+                document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+            );
+        });
     });
 </script>
